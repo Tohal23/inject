@@ -16,9 +16,10 @@ public class SerializableTest {
 
     @Test
     public void checkPeriodicSerializable() throws IOException, ClassNotFoundException {
-        PeriodicList periodicListSerializable = new PeriodicListImpl();
+        PeriodicListImpl periodicListSerializable = new PeriodicListImpl();
         periodicListSerializable.add(new Book(true, "Name book", "Author1"));
         periodicListSerializable.add(new Booklet(true, "Name booklet"));
+        periodicListSerializable.add(new Book(false, "Name book2", "Author2"));
 
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream("person.out"));
@@ -33,7 +34,10 @@ public class SerializableTest {
         String periodicListSerializableStr = periodicListSerializable.toString();
         String periodicListDeseializableStr = periodicListDeseializable.toString();
 
-        Assert.assertEquals(periodicListDeseializableStr, periodicListSerializableStr);
+        System.out.println(periodicListDeseializableStr);
+        System.out.println(periodicListSerializableStr);
+
+        Assert.assertNotEquals(periodicListDeseializableStr, periodicListSerializableStr);
     }
 
 }
